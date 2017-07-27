@@ -1,0 +1,36 @@
+Demo 1 Install Azure Cli 2.0
+
+curl -L https://aka.ms/InstallAzureCli | bash
+exec -l $SHELL
+
+Demo 2 Walkthrough 
+az -h 
+az vm list
+az vm list --out tsv
+az login
+az account list
+az configure
+az  account -h
+az vm -h
+
+Demo 3 Create VM
+az vm create 
+az vm create --image 
+az vm create --image UbuntuLTS
+az vm create --image UbuntuLTS -g resourcegroup -n sysadmin --no-wait
+az vm list
+
+Demo 4 query 
+az vm list --query "[].{name: name , os: storageProfile.osDisk.osType}" --out tsv
+az vm list --query "[].{name: name , os: storageProfile.osDisk.osType}" --out tsv | grep linux
+
+demo 5 deploy arm
+az group deployment create \
+    --name ExampleDeployment \
+    --resource-group clidemo \
+    --template-uri "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-storage-account-create/azuredeploy.json" \
+    --parameters "{\"storageAccountType\":{\"value\":\"Standard_GRS\"}}"
+
+
+
+
